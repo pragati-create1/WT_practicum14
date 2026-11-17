@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Urban Bloom Quiz</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #e8f5e9;
+    text-align: center;
+}
+
+.quiz {
+    background: white;
+    width: 320px;
+    margin: 60px auto;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px #aaa;
+}
+
+h2 {
+    color: darkgreen;
+}
+
+button {
+    background: #228b22;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 8px;
+}
+
+button:hover {
+    background: #145214;
+}
+
+#result {
+    color: darkgreen;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="quiz">
+    <h2>Urban Bloom Quiz</h2>
+
+    <p id="question">Which plan is best for growing vegetables at home?</p>
+
+    <button onclick="checkAnswer('A')">A. Kitchen Garden</button>
+    <button onclick="checkAnswer('B')">B. Flower Garden</button>
+    <button onclick="checkAnswer('C')">C. Rock Garden</button>
+
+    <p id="result"></p>
+
+    <button onclick="nextQuestion()">Next</button>
+</div>
+
+<script>
+let questions = [
+    "Which plan is best for growing vegetables at home?",
+    "Which plan helps save water while gardening?",
+    "Which plan is suitable for growing plants in small spaces?"
+];
+
+let answers = ["A", "B", "C"];
+
+let options = [
+    ["Kitchen Garden", "Flower Garden", "Rock Garden"],
+    ["Drip Irrigation", "Flood Irrigation", "Overwatering"],
+    ["Vertical Garden", "Forest Garden", "Large Farm"]
+];
+
+let index = 0;
+
+function checkAnswer(choice) {
+    let result = document.getElementById("result");
+
+    if (choice === answers[index]) {
+        result.innerHTML = "Correct Answer!";
+    } else {
+        result.innerHTML = "Wrong Answer! Try again.";
+    }
+}
+
+function nextQuestion() {
+    index++;
+
+    if (index < questions.length) {
+        document.getElementById("question").innerHTML =
+            questions[index];
+
+        let buttons = document.querySelectorAll(".quiz button");
+
+        buttons[0].innerHTML = "A. " + options[index][0];
+        buttons[1].innerHTML = "B. " + options[index][1];
+        buttons[2].innerHTML = "C. " + options[index][2];
+
+        document.getElementById("result").innerHTML = "";
+    } else {
+        document.getElementById("question").innerHTML =
+            "Quiz Completed! Thank you.";
+
+        document.getElementById("result").innerHTML =
+            "Explore more gardening plans at Urban Bloom.";
+
+        document.querySelectorAll(".quiz button")
+            .forEach(btn => btn.style.display = "none");
+    }
+}
+</script>
+
+</body>
+</html>
